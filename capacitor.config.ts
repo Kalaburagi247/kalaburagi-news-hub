@@ -17,6 +17,9 @@ const config: CapacitorConfig = {
       spinnerColor: "#0F3460",
     },
   },
+  ios: {
+    contentInset: "always",
+  },
 };
 
 export default config;
