@@ -6,7 +6,7 @@ const config: CapacitorConfig = {
   appName: 'kalaburagi-news-hub',
   webDir: 'dist',
   server: {
-    url: 'https://eab65df8-34e4-4eb0-864a-81c782fb8127.lovableproject.com?forceHideBadge=true',
+    androidScheme: 'https',
     cleartext: true
   },
   plugins: {
