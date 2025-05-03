@@ -64,9 +64,9 @@ export default {
 					ring: 'hsl(var(--sidebar-ring))'
 				},
 				news: {
-					primary: '#0F3460',
-					secondary: '#1A508B',
-					accent: '#E94560',
+					primary: '#FF4500', // Updated to match logo's orange/red color
+					secondary: '#000000', // Updated to match logo's black color
+					accent: '#FF4500', // Using the same orange/red for accent
 					light: '#f8f9fa',
 					dark: '#212529',
 				}
@@ -103,9 +103,9 @@ export default {
 					css: {
 						maxWidth: '100%',
 						a: {
-							color: '#1A508B',
+							color: '#000000',
 							'&:hover': {
-								color: '#E94560',
+								color: '#FF4500',
 							},
 						},
 					},
