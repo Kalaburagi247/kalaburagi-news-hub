@@ -27,6 +27,10 @@ const config: CapacitorConfig = {
       videoHeight: 1080
     },
   },
+  android: {
+    // Specifying to use only the default launcher icon to avoid looking for round icons
+    iconPath: "resources/android/icon/drawable-xxxhdpi-icon.png"
+  },
   ios: {
     contentInset: "always",
   },
