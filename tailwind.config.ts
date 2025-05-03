@@ -64,9 +64,9 @@ export default {
 					ring: 'hsl(var(--sidebar-ring))'
 				},
 				news: {
-					primary: '#FF4500', // Updated to match logo's orange/red color
-					secondary: '#000000', // Updated to match logo's black color
-					accent: '#FF4500', // Using the same orange/red for accent
+					primary: '#000000', // Changed to black
+					secondary: '#000000', // Black
+					accent: '#333333', // Dark gray for accent
 					light: '#f8f9fa',
 					dark: '#212529',
 				}
@@ -105,7 +105,7 @@ export default {
 						a: {
 							color: '#000000',
 							'&:hover': {
-								color: '#FF4500',
+								color: '#333333',
 							},
 						},
 					},

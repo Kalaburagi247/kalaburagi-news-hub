@@ -82,7 +82,7 @@
   }
 
   a {
-    @apply text-news-secondary hover:text-news-primary transition-colors;
+    @apply text-news-secondary hover:text-gray-600 transition-colors;
   }
 }
 
@@ -112,7 +112,7 @@
 }
 
 .bottom-nav-item.active {
-  @apply text-news-primary;
+  @apply text-black;
 }
 
 .article-content {
