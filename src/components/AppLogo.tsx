@@ -19,7 +19,7 @@ const AppLogo: React.FC<AppLogoProps> = ({ size = 'md', className = '' }) => {
       <img 
         src="/lovable-uploads/57fd9bb0-1e1a-40a4-9fdd-5e6717aac1db.png" 
         alt="Kalaburagi 24/7 Logo" 
-        className="w-full h-full"
+        className="w-full h-full object-contain"
       />
     </div>
   );
