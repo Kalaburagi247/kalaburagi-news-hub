@@ -11,7 +11,9 @@ document.addEventListener('DOMContentLoaded', () => {
   root.render(<App />);
   
   // Hide the splash screen with a fade effect
-  SplashScreen.hide({
-    fadeOutDuration: 500
-  }).catch(err => console.error('Error hiding splash screen', err));
+  setTimeout(() => {
+    SplashScreen.hide({
+      fadeOutDuration: 500
+    }).catch(err => console.error('Error hiding splash screen', err));
+  }, 100); // Small delay to ensure app is rendered first
 });
