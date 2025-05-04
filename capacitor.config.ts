@@ -13,18 +13,12 @@ const config: CapacitorConfig = {
     SplashScreen: {
       launchShowDuration: 3000,
       launchAutoHide: true,
-      backgroundColor: "#000000",
+      backgroundColor: "#FFFFFF",
       androidSplashResourceName: "splash",
       androidScaleType: "CENTER_CROP",
       showSpinner: false,
       splashFullScreen: true,
       splashImmersive: true,
-      // Video splash screen configuration
-      useDialog: false,
-      videoAutoHide: true,
-      videoDuration: 3000,
-      videoWidth: 1920,
-      videoHeight: 1080
     },
   },
   android: {
