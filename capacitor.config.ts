@@ -11,17 +11,19 @@ const config: CapacitorConfig = {
   },
   plugins: {
     SplashScreen: {
-      launchShowDuration: 3000, // Reduced to 3 seconds
-      launchAutoHide: true, // Set to true to ensure it auto-hides
+      launchShowDuration: 3000,
+      launchAutoHide: true,
       backgroundColor: "#FFFFFF",
       androidSplashResourceName: "splash",
       androidScaleType: "CENTER_CROP",
-      showSpinner: true, // Added spinner to show loading state
+      showSpinner: true,
       splashFullScreen: true,
       splashImmersive: true,
-      // Video configuration
-      androidSplashResourceVideo: "splash", 
-      iosSplashResourceVideo: "splash",
+      
+      // Video splash configuration with proper paths
+      androidSplashResourceVideo: "splash.mp4", // Include extension
+      iosSplashResourceVideo: "splash.mp4", // Include extension
+      spinnerColor: "#999999", // Add spinner color
     },
   },
   android: {
