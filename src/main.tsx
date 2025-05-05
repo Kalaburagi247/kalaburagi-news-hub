@@ -5,31 +5,20 @@ import './index.css'
 import { SplashScreen } from '@capacitor/splash-screen'
 
 // Initialize the app
-document.addEventListener('DOMContentLoaded', async () => {
+document.addEventListener('DOMContentLoaded', () => {
   try {
-    // Force the splash screen to show
-    await SplashScreen.show({
-      autoHide: false,
-    });
-    
-    // Initialize the React app
+    // Initialize the React app immediately
     const root = createRoot(document.getElementById("root")!);
     root.render(<App />);
     
-    // Hide splash screen after the app is fully loaded
-    window.addEventListener('load', () => {
-      // Delay to ensure the app has time to fully render
-      setTimeout(() => {
-        SplashScreen.hide({
-          fadeOutDuration: 500
-        }).catch(err => console.error('Error hiding splash screen', err));
-      }, 1000);
-    });
+    // Let the Capacitor splash screen handle itself based on configuration
+    console.log('App initialized, splash screen should auto-hide');
   } catch (err) {
-    console.error('Error with splash screen:', err);
+    console.error('Error initializing app:', err);
     
-    // Initialize the app even if there's an error with the splash screen
-    const root = createRoot(document.getElementById("root")!);
-    root.render(<App />);
+    // Force hide splash screen in case of error
+    SplashScreen.hide().catch(err => 
+      console.error('Error hiding splash screen:', err)
+    );
   }
 });

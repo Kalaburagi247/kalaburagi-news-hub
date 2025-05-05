@@ -11,21 +11,20 @@ const config: CapacitorConfig = {
   },
   plugins: {
     SplashScreen: {
-      launchShowDuration: 5000, // 5 seconds
-      launchAutoHide: false,
+      launchShowDuration: 3000, // Reduced to 3 seconds
+      launchAutoHide: true, // Set to true to ensure it auto-hides
       backgroundColor: "#FFFFFF",
       androidSplashResourceName: "splash",
       androidScaleType: "CENTER_CROP",
-      showSpinner: false,
+      showSpinner: true, // Added spinner to show loading state
       splashFullScreen: true,
       splashImmersive: true,
-      // Update the video splash configuration
-      androidSplashResourceVideo: "splash", // The name of your video file without extension
-      iosSplashResourceVideo: "splash", // The name of your video file without extension
+      // Video configuration
+      androidSplashResourceVideo: "splash", 
+      iosSplashResourceVideo: "splash",
     },
   },
   android: {
-    // Using the correct property for Android icon configuration
     icon: "resources/android/icon/drawable-xxxhdpi-icon.png"
   },
   ios: {
