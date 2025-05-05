@@ -19,9 +19,9 @@ const config: CapacitorConfig = {
       showSpinner: false,
       splashFullScreen: true,
       splashImmersive: true,
-      // Add video splash configuration
-      androidSplashResourceVideo: "splash_video", // The name of your video file without extension
-      iosSplashResourceVideo: "splash_video", // The name of your video file without extension
+      // Update video splash configuration to match your file name
+      androidSplashResourceVideo: "splash", // The name of your video file without extension
+      iosSplashResourceVideo: "splash", // The name of your video file without extension
     },
   },
   android: {
