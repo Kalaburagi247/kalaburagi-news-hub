@@ -12,14 +12,14 @@ const config: CapacitorConfig = {
   plugins: {
     SplashScreen: {
       launchShowDuration: 5000, // 5 seconds
-      launchAutoHide: true,
+      launchAutoHide: false,
       backgroundColor: "#FFFFFF",
       androidSplashResourceName: "splash",
       androidScaleType: "CENTER_CROP",
       showSpinner: false,
       splashFullScreen: true,
       splashImmersive: true,
-      // Update video splash configuration to match your file name
+      // Update the video splash configuration
       androidSplashResourceVideo: "splash", // The name of your video file without extension
       iosSplashResourceVideo: "splash", // The name of your video file without extension
     },
