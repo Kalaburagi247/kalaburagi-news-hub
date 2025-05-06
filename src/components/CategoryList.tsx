@@ -1,9 +1,9 @@
 
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { ScrollArea } from './ui/scroll-area';
 import { Button } from './ui/button';
 import { WordPressCategory } from '../services/wordpress-api';
+import { Carousel, CarouselContent, CarouselItem } from './ui/carousel';
 
 interface CategoryListProps {
   categories: WordPressCategory[];
@@ -19,21 +19,23 @@ const CategoryList: React.FC<CategoryListProps> = ({ categories, loading }) => {
           <p>Loading categories...</p>
         </div>
       ) : (
-        <ScrollArea className="w-full whitespace-nowrap">
-          <div className="flex space-x-2 pb-2">
+        <Carousel className="w-full">
+          <CarouselContent className="-ml-2 md:-ml-4">
             {categories.map((category) => (
-              <Link key={category.id} to={`/category/${category.id}`}>
-                <Button 
-                  variant="outline" 
-                  size="sm"
-                  className="hover:bg-news-primary hover:text-white transition-colors"
-                >
-                  {category.name}
-                </Button>
-              </Link>
+              <CarouselItem key={category.id} className="pl-2 md:pl-4 basis-auto">
+                <Link to={`/category/${category.id}`}>
+                  <Button 
+                    variant="outline" 
+                    size="sm"
+                    className="hover:bg-news-primary hover:text-white transition-colors whitespace-nowrap"
+                  >
+                    {category.name}
+                  </Button>
+                </Link>
+              </CarouselItem>
             ))}
-          </div>
-        </ScrollArea>
+          </CarouselContent>
+        </Carousel>
       )}
     </div>
   );
