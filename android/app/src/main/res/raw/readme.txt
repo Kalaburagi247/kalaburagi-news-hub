@@ -1,6 +1,4 @@
 
-# Raw Resources Folder
-
 This folder contains raw resources like videos that are used in the app.
 The splash.mp4 file must be placed here for the splash screen video to work.
 
