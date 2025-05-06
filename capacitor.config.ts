@@ -20,10 +20,11 @@ const config: CapacitorConfig = {
       splashFullScreen: true,
       splashImmersive: true,
       
-      // Video splash configuration with proper paths
-      androidSplashResourceVideo: "splash.mp4", // Include extension
-      iosSplashResourceVideo: "splash.mp4", // Include extension
-      spinnerColor: "#999999", // Add spinner color
+      // Use just the filename without extension for Android
+      androidSplashResourceVideo: "splash",
+      // For iOS, include the extension
+      iosSplashResourceVideo: "splash.mp4",
+      spinnerColor: "#999999",
     },
   },
   android: {
