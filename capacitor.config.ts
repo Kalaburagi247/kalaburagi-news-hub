@@ -11,19 +11,14 @@ const config: CapacitorConfig = {
   },
   plugins: {
     SplashScreen: {
-      launchShowDuration: 3000,
+      launchShowDuration: 2000,
       launchAutoHide: true,
       backgroundColor: "#FFFFFF",
       androidSplashResourceName: "splash",
       androidScaleType: "CENTER_CROP",
-      showSpinner: true,
+      showSpinner: false,
       splashFullScreen: true,
       splashImmersive: true,
-      
-      // Use just the filename without extension for Android
-      androidSplashResourceVideo: "splash",
-      // For iOS, include the extension
-      iosSplashResourceVideo: "splash.mp4",
       spinnerColor: "#999999",
     },
   },

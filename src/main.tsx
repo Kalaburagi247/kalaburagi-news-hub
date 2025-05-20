@@ -9,14 +9,11 @@ document.addEventListener('DOMContentLoaded', async () => {
   try {
     console.log('Starting app initialization with splash screen');
     
-    // Let the native splash screen handle video playback based on config
-    // No need to explicitly call SplashScreen.show() here as it's handled by the native layer
-    
     // Initialize the React app
     const root = createRoot(document.getElementById("root")!);
     root.render(<App />);
     
-    console.log('App initialized, splash screen should play video and auto-hide');
+    console.log('App initialized, splash screen will auto-hide after 2 seconds');
   } catch (err) {
     console.error('Error initializing app:', err);
     
