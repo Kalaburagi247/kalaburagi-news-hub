@@ -4,38 +4,38 @@ import App from './App.tsx'
 import './index.css'
 import { SplashScreen } from '@capacitor/splash-screen'
 
+// Create and show splash screen immediately
+const splashDiv = document.createElement('div');
+splashDiv.id = 'custom-splash';
+splashDiv.style.cssText = `
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 9999;
+`;
+
+const logoImg = document.createElement('img');
+logoImg.src = '/lovable-uploads/57fd9bb0-1e1a-40a4-9fdd-5e6717aac1db.png';
+logoImg.style.cssText = `
+  width: 120px;
+  height: 120px;
+  object-fit: contain;
+`;
+logoImg.alt = 'Kalaburagi 24/7 Logo';
+
+splashDiv.appendChild(logoImg);
+document.body.appendChild(splashDiv);
+
 // Initialize the app
 document.addEventListener('DOMContentLoaded', async () => {
   try {
     console.log('Starting app initialization with splash screen');
-    
-    // Show a simple splash screen with logo
-    const splashDiv = document.createElement('div');
-    splashDiv.id = 'custom-splash';
-    splashDiv.style.cssText = `
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      background: white;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      z-index: 9999;
-    `;
-    
-    const logoImg = document.createElement('img');
-    logoImg.src = '/lovable-uploads/57fd9bb0-1e1a-40a4-9fdd-5e6717aac1db.png';
-    logoImg.style.cssText = `
-      width: 120px;
-      height: 120px;
-      object-fit: contain;
-    `;
-    logoImg.alt = 'Kalaburagi 24/7 Logo';
-    
-    splashDiv.appendChild(logoImg);
-    document.body.appendChild(splashDiv);
     
     // Initialize the React app
     const root = createRoot(document.getElementById("root")!);
