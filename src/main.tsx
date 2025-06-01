@@ -41,15 +41,15 @@ document.addEventListener('DOMContentLoaded', async () => {
     const root = createRoot(document.getElementById("root")!);
     root.render(<App />);
     
-    // Remove custom splash after 2 seconds
+    // Remove custom splash after 3 seconds
     setTimeout(() => {
       const splash = document.getElementById('custom-splash');
       if (splash) {
         splash.remove();
       }
-    }, 2000);
+    }, 3000);
     
-    console.log('App initialized, splash screen will auto-hide after 2 seconds');
+    console.log('App initialized, splash screen will auto-hide after 3 seconds');
   } catch (err) {
     console.error('Error initializing app:', err);
     
