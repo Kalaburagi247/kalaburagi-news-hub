@@ -9,9 +9,45 @@ document.addEventListener('DOMContentLoaded', async () => {
   try {
     console.log('Starting app initialization with splash screen');
     
+    // Show a simple splash screen with logo
+    const splashDiv = document.createElement('div');
+    splashDiv.id = 'custom-splash';
+    splashDiv.style.cssText = `
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: white;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      z-index: 9999;
+    `;
+    
+    const logoImg = document.createElement('img');
+    logoImg.src = '/lovable-uploads/57fd9bb0-1e1a-40a4-9fdd-5e6717aac1db.png';
+    logoImg.style.cssText = `
+      width: 120px;
+      height: 120px;
+      object-fit: contain;
+    `;
+    logoImg.alt = 'Kalaburagi 24/7 Logo';
+    
+    splashDiv.appendChild(logoImg);
+    document.body.appendChild(splashDiv);
+    
     // Initialize the React app
     const root = createRoot(document.getElementById("root")!);
     root.render(<App />);
+    
+    // Remove custom splash after 2 seconds
+    setTimeout(() => {
+      const splash = document.getElementById('custom-splash');
+      if (splash) {
+        splash.remove();
+      }
+    }, 2000);
     
     console.log('App initialized, splash screen will auto-hide after 2 seconds');
   } catch (err) {
@@ -21,6 +57,12 @@ document.addEventListener('DOMContentLoaded', async () => {
     SplashScreen.hide().catch(err => 
       console.error('Error hiding splash screen:', err)
     );
+    
+    // Remove custom splash in case of error
+    const splash = document.getElementById('custom-splash');
+    if (splash) {
+      splash.remove();
+    }
     
     // Still render the app even if there's an error
     const root = createRoot(document.getElementById("root")!);
