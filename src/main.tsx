@@ -41,9 +41,14 @@ document.addEventListener('DOMContentLoaded', async () => {
     const root = createRoot(document.getElementById("root")!);
     root.render(<App />);
     
-    // Remove custom splash after 3 seconds
+    // Show the root div and remove custom splash after 3 seconds
     setTimeout(() => {
+      const rootElement = document.getElementById("root");
       const splash = document.getElementById('custom-splash');
+      
+      if (rootElement) {
+        rootElement.style.display = 'block';
+      }
       if (splash) {
         splash.remove();
       }
@@ -60,8 +65,13 @@ document.addEventListener('DOMContentLoaded', async () => {
     
     // Remove custom splash in case of error
     const splash = document.getElementById('custom-splash');
+    const rootElement = document.getElementById("root");
+    
     if (splash) {
       splash.remove();
+    }
+    if (rootElement) {
+      rootElement.style.display = 'block';
     }
     
     // Still render the app even if there's an error
