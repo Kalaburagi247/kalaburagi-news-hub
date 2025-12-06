@@ -116,7 +116,7 @@
 }
 
 .article-content {
-  @apply prose prose-sm max-w-none;
+  @apply max-w-none;
 }
 
 .article-content img {
