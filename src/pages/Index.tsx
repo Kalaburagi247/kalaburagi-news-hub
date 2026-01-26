@@ -5,9 +5,10 @@ import { fetchLatestPosts, fetchCategories, WordPressPost } from '../services/wo
 import ArticleCard from '../components/ArticleCard';
 import CategoryList from '../components/CategoryList';
 import LoadingSpinner from '../components/LoadingSpinner';
-import SearchBar from '../components/SearchBar';
+import TopHeader from '../components/TopHeader';
 import BottomNavigation from '../components/BottomNavigation';
 import { toast } from 'sonner';
+
 
 const Index: React.FC = () => {
   const { 
@@ -40,19 +41,10 @@ const Index: React.FC = () => {
   
   return (
     <div className="pb-20">
-      {/* Header */}
-      <header className="bg-news-primary text-white p-4">
-        <h1 className="text-2xl font-bold text-white">Kalaburagi 24/7</h1>
-        <p className="text-sm text-white/80">Your source for local news</p>
-      </header>
-      
-      {/* Search */}
-      <div className="px-4 pt-4">
-        <SearchBar />
-      </div>
+      <TopHeader />
       
       {/* Main content */}
-      <main className="container px-4">
+      <main className="container px-4 pt-4">
         {/* Categories */}
         {categories && categories.length > 0 && (
           <CategoryList categories={categories} loading={categoriesLoading} />
