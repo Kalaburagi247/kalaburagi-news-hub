@@ -139,6 +139,76 @@ export const searchPosts = async (query: string, page = 1, perPage = 10): Promis
   }
 };
 
+// Fetch video/reel posts - looks for posts in "reels" or "videos" category
+export const fetchReelPosts = async (page = 1, perPage = 10): Promise<WordPressPost[]> => {
+  try {
+    // First try to get posts from a "reels" category
+    const categoriesResponse = await fetch(`${API_BASE_URL}/categories?slug=reels,videos,shorts`);
+    const categories = await categoriesResponse.json();
+    
+    if (categories.length > 0) {
+      const categoryIds = categories.map((cat: WordPressCategory) => cat.id).join(',');
+      const response = await fetch(
+        `${API_BASE_URL}/posts?_embed=true&categories=${categoryIds}&page=${page}&per_page=${perPage}`
+      );
+      
+      if (!response.ok) {
+        throw new Error('Failed to fetch reel posts');
+      }
+      
+      return await response.json();
+    }
+    
+    // Fallback: fetch posts that might contain videos (search for video-related content)
+    const response = await fetch(
+      `${API_BASE_URL}/posts?_embed=true&page=${page}&per_page=${perPage}&search=video`
+    );
+    
+    if (!response.ok) {
+      throw new Error('Failed to fetch reel posts');
+    }
+    
+    return await response.json();
+  } catch (error) {
+    console.error('Error fetching reel posts:', error);
+    toast.error('Failed to load reels');
+    return [];
+  }
+};
+
+// Extract video URL from post content
+export const getPostVideoUrl = (post: WordPressPost): string | null => {
+  const content = post.content.rendered;
+  
+  // Try to find video URL in content
+  // WordPress video block
+  const videoMatch = content.match(/<video[^>]*src="([^"]+)"/);
+  if (videoMatch) return videoMatch[1];
+  
+  // WordPress video shortcode or figure
+  const figureVideoMatch = content.match(/<figure[^>]*>.*?<video[^>]*src="([^"]+)"/s);
+  if (figureVideoMatch) return figureVideoMatch[1];
+  
+  // Direct mp4 link
+  const mp4Match = content.match(/https?:\/\/[^\s"<>]+\.mp4/);
+  if (mp4Match) return mp4Match[0];
+  
+  // YouTube embed
+  const youtubeMatch = content.match(/(?:youtube\.com\/embed\/|youtu\.be\/)([a-zA-Z0-9_-]+)/);
+  if (youtubeMatch) return `https://www.youtube.com/embed/${youtubeMatch[1]}`;
+  
+  // Vimeo embed
+  const vimeoMatch = content.match(/vimeo\.com\/(?:video\/)?(\d+)/);
+  if (vimeoMatch) return `https://player.vimeo.com/video/${vimeoMatch[1]}`;
+  
+  return null;
+};
+
+// Check if post has video content
+export const hasVideoContent = (post: WordPressPost): boolean => {
+  return getPostVideoUrl(post) !== null;
+};
+
 export const getPostFeaturedImage = (post: WordPressPost): string => {
   if (post._embedded && post._embedded['wp:featuredmedia'] && post._embedded['wp:featuredmedia'][0]) {
     const media = post._embedded['wp:featuredmedia'][0];

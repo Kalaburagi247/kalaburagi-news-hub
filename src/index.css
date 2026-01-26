@@ -122,3 +122,13 @@
 .article-content img {
   @apply w-full h-auto rounded-md my-4;
 }
+
+/* Hide scrollbar for reels */
+.scrollbar-hide {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+.scrollbar-hide::-webkit-scrollbar {
+  display: none;
+}
