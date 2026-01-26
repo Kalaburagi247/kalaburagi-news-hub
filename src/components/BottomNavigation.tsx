@@ -1,7 +1,7 @@
 
 import React from 'react';
 import { NavLink } from 'react-router-dom';
-import { Home, Search, LayoutList, Settings } from 'lucide-react';
+import { Home, LayoutList, Film, Zap, Coffee } from 'lucide-react';
 
 const BottomNavigation: React.FC = () => {
   return (
@@ -13,7 +13,7 @@ const BottomNavigation: React.FC = () => {
         }
         end
       >
-        <Home className="h-6 w-6 mb-1" />
+        <Home className="h-5 w-5 mb-1" />
         <span>Home</span>
       </NavLink>
       <NavLink 
@@ -22,26 +22,35 @@ const BottomNavigation: React.FC = () => {
           `bottom-nav-item ${isActive ? 'active' : ''}`
         }
       >
-        <LayoutList className="h-6 w-6 mb-1" />
+        <LayoutList className="h-5 w-5 mb-1" />
         <span>Categories</span>
       </NavLink>
       <NavLink 
-        to="/search" 
+        to="/reels" 
         className={({ isActive }) => 
           `bottom-nav-item ${isActive ? 'active' : ''}`
         }
       >
-        <Search className="h-6 w-6 mb-1" />
-        <span>Search</span>
+        <Film className="h-5 w-5 mb-1" />
+        <span>Reels</span>
       </NavLink>
       <NavLink 
-        to="/settings" 
+        to="/flash-news" 
         className={({ isActive }) => 
           `bottom-nav-item ${isActive ? 'active' : ''}`
         }
       >
-        <Settings className="h-6 w-6 mb-1" />
-        <span>Settings</span>
+        <Zap className="h-5 w-5 mb-1" />
+        <span>Flash News</span>
+      </NavLink>
+      <NavLink 
+        to="/daily-bites" 
+        className={({ isActive }) => 
+          `bottom-nav-item ${isActive ? 'active' : ''}`
+        }
+      >
+        <Coffee className="h-5 w-5 mb-1" />
+        <span>Daily Bites</span>
       </NavLink>
     </nav>
   );

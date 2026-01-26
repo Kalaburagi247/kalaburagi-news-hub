@@ -9,6 +9,9 @@ import CategoryPage from "./pages/CategoryPage";
 import CategoriesPage from "./pages/CategoriesPage";
 import SearchPage from "./pages/SearchPage";
 import SettingsPage from "./pages/SettingsPage";
+import ReelsPage from "./pages/ReelsPage";
+import FlashNewsPage from "./pages/FlashNewsPage";
+import DailyBitesPage from "./pages/DailyBitesPage";
 import NotFound from "./pages/NotFound";
 import { TooltipProvider } from "@/components/ui/tooltip";
 
@@ -27,6 +30,9 @@ const App = () => (
           <Route path="/categories" element={<CategoriesPage />} />
           <Route path="/search" element={<SearchPage />} />
           <Route path="/settings" element={<SettingsPage />} />
+          <Route path="/reels" element={<ReelsPage />} />
+          <Route path="/flash-news" element={<FlashNewsPage />} />
+          <Route path="/daily-bites" element={<DailyBitesPage />} />
           <Route path="*" element={<NotFound />} />
         </Routes>
       </TooltipProvider>
