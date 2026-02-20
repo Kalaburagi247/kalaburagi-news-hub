@@ -1,8 +1,9 @@
 
 import React, { useEffect } from 'react';
 import { useQuery } from '@tanstack/react-query';
-import { fetchLatestPosts, WordPressPost } from '../services/wordpress-api';
+import { fetchLatestPosts, fetchCategories, WordPressPost } from '../services/wordpress-api';
 import ArticleCard from '../components/ArticleCard';
+import CategoryList from '../components/CategoryList';
 import LoadingSpinner from '../components/LoadingSpinner';
 import TopHeader from '../components/TopHeader';
 import BottomNavigation from '../components/BottomNavigation';
@@ -16,6 +17,14 @@ const ArticlesPage: React.FC = () => {
   } = useQuery({
     queryKey: ['latestPosts'],
     queryFn: () => fetchLatestPosts(1, 15),
+  });
+
+  const { 
+    data: categories, 
+    isLoading: categoriesLoading 
+  } = useQuery({
+    queryKey: ['categories'],
+    queryFn: fetchCategories,
   });
 
   useEffect(() => {
@@ -33,6 +42,10 @@ const ArticlesPage: React.FC = () => {
       <TopHeader />
       
       <main className="container px-4 pt-4">
+        {categories && categories.length > 0 && (
+          <CategoryList categories={categories} loading={categoriesLoading} />
+        )}
+        
         <h2 className="text-xl font-bold mb-3">Latest News</h2>
         {postsLoading ? (
           <LoadingSpinner />
