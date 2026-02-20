@@ -8,30 +8,42 @@ import TopHeader from '../components/TopHeader';
 import BottomNavigation from '../components/BottomNavigation';
 import { Newspaper, Briefcase, Trophy, Heart, Cpu, GraduationCap, Globe, Landmark, Clapperboard, Users, Leaf, Utensils, Palette, Car, DollarSign, Folder } from 'lucide-react';
 
-const categoryIcons: Record<string, React.ReactNode> = {
-  news: <Newspaper className="h-6 w-6" />,
-  business: <Briefcase className="h-6 w-6" />,
-  sports: <Trophy className="h-6 w-6" />,
-  health: <Heart className="h-6 w-6" />,
-  technology: <Cpu className="h-6 w-6" />,
-  education: <GraduationCap className="h-6 w-6" />,
-  world: <Globe className="h-6 w-6" />,
-  politics: <Landmark className="h-6 w-6" />,
-  entertainment: <Clapperboard className="h-6 w-6" />,
-  lifestyle: <Users className="h-6 w-6" />,
-  environment: <Leaf className="h-6 w-6" />,
-  food: <Utensils className="h-6 w-6" />,
-  culture: <Palette className="h-6 w-6" />,
-  automobile: <Car className="h-6 w-6" />,
-  finance: <DollarSign className="h-6 w-6" />,
+const categoryStyles: Record<string, { icon: React.ReactNode; bg: string; color: string }> = {
+  news: { icon: <Newspaper className="h-7 w-7" />, bg: 'bg-red-100', color: 'text-red-600' },
+  business: { icon: <Briefcase className="h-7 w-7" />, bg: 'bg-blue-100', color: 'text-blue-600' },
+  sports: { icon: <Trophy className="h-7 w-7" />, bg: 'bg-amber-100', color: 'text-amber-600' },
+  health: { icon: <Heart className="h-7 w-7" />, bg: 'bg-pink-100', color: 'text-pink-600' },
+  technology: { icon: <Cpu className="h-7 w-7" />, bg: 'bg-cyan-100', color: 'text-cyan-600' },
+  education: { icon: <GraduationCap className="h-7 w-7" />, bg: 'bg-indigo-100', color: 'text-indigo-600' },
+  world: { icon: <Globe className="h-7 w-7" />, bg: 'bg-emerald-100', color: 'text-emerald-600' },
+  politics: { icon: <Landmark className="h-7 w-7" />, bg: 'bg-violet-100', color: 'text-violet-600' },
+  entertainment: { icon: <Clapperboard className="h-7 w-7" />, bg: 'bg-orange-100', color: 'text-orange-600' },
+  lifestyle: { icon: <Users className="h-7 w-7" />, bg: 'bg-teal-100', color: 'text-teal-600' },
+  environment: { icon: <Leaf className="h-7 w-7" />, bg: 'bg-green-100', color: 'text-green-600' },
+  food: { icon: <Utensils className="h-7 w-7" />, bg: 'bg-yellow-100', color: 'text-yellow-600' },
+  culture: { icon: <Palette className="h-7 w-7" />, bg: 'bg-fuchsia-100', color: 'text-fuchsia-600' },
+  automobile: { icon: <Car className="h-7 w-7" />, bg: 'bg-slate-100', color: 'text-slate-600' },
+  finance: { icon: <DollarSign className="h-7 w-7" />, bg: 'bg-lime-100', color: 'text-lime-600' },
 };
 
-const getCategoryIcon = (slug: string) => {
+const fallbackColors = [
+  { bg: 'bg-rose-100', color: 'text-rose-600' },
+  { bg: 'bg-sky-100', color: 'text-sky-600' },
+  { bg: 'bg-purple-100', color: 'text-purple-600' },
+  { bg: 'bg-emerald-100', color: 'text-emerald-600' },
+  { bg: 'bg-amber-100', color: 'text-amber-600' },
+  { bg: 'bg-cyan-100', color: 'text-cyan-600' },
+  { bg: 'bg-pink-100', color: 'text-pink-600' },
+  { bg: 'bg-indigo-100', color: 'text-indigo-600' },
+];
+
+const getCategoryStyle = (slug: string, index: number) => {
   const lower = slug.toLowerCase();
-  for (const key of Object.keys(categoryIcons)) {
-    if (lower.includes(key)) return categoryIcons[key];
+  for (const key of Object.keys(categoryStyles)) {
+    if (lower.includes(key)) return categoryStyles[key];
   }
-  return <Folder className="h-6 w-6" />;
+  const fallback = fallbackColors[index % fallbackColors.length];
+  return { icon: <Folder className="h-7 w-7" />, ...fallback };
 };
 
 const Index: React.FC = () => {
@@ -47,25 +59,29 @@ const Index: React.FC = () => {
     <div className="pb-20">
       <TopHeader />
       
-      <main className="container px-4 pt-4">
-        <h2 className="text-xl font-bold mb-4">Categories</h2>
+      <main className="container px-4 pt-6">
+        <h2 className="text-xl font-bold mb-1">Explore</h2>
+        <p className="text-sm text-muted-foreground mb-5">What are you looking for today?</p>
         {isLoading ? (
           <LoadingSpinner />
         ) : categories && categories.length > 0 ? (
-          <div className="grid grid-cols-3 gap-3">
-            {categories.map((category: WordPressCategory) => (
-              <Link
-                key={category.id}
-                to={`/category/${category.id}`}
-                className="flex flex-col items-center justify-center p-4 rounded-xl border border-border bg-card hover:bg-accent transition-colors text-center gap-2"
-              >
-                <div className="w-12 h-12 rounded-full bg-primary/10 flex items-center justify-center text-primary">
-                  {getCategoryIcon(category.slug)}
-                </div>
-                <span className="text-xs font-medium leading-tight text-foreground">{category.name}</span>
-                <span className="text-[10px] text-muted-foreground">{category.count} articles</span>
-              </Link>
-            ))}
+          <div className="grid grid-cols-3 gap-4">
+            {categories.map((category: WordPressCategory, index: number) => {
+              const style = getCategoryStyle(category.slug, index);
+              return (
+                <Link
+                  key={category.id}
+                  to={`/category/${category.id}`}
+                  className="flex flex-col items-center justify-center p-4 rounded-2xl border border-border bg-card hover:scale-105 transition-transform duration-200 text-center gap-2 shadow-sm"
+                >
+                  <div className={`w-14 h-14 rounded-2xl ${style.bg} flex items-center justify-center ${style.color}`}>
+                    {style.icon}
+                  </div>
+                  <span className="text-xs font-semibold leading-tight text-foreground mt-1">{category.name}</span>
+                  <span className="text-[10px] text-muted-foreground">{category.count}</span>
+                </Link>
+              );
+            })}
           </div>
         ) : (
           <div className="text-center py-8">
