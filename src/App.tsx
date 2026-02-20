@@ -7,6 +7,7 @@ import Index from "./pages/Index";
 import ArticlePage from "./pages/ArticlePage";
 import CategoryPage from "./pages/CategoryPage";
 import CategoriesPage from "./pages/CategoriesPage";
+import ArticlesPage from "./pages/ArticlesPage";
 import SearchPage from "./pages/SearchPage";
 import SettingsPage from "./pages/SettingsPage";
 import ReelsPage from "./pages/ReelsPage";
@@ -28,6 +29,7 @@ const App = () => (
           <Route path="/article/:slug" element={<ArticlePage />} />
           <Route path="/category/:id" element={<CategoryPage />} />
           <Route path="/categories" element={<CategoriesPage />} />
+          <Route path="/articles" element={<ArticlesPage />} />
           <Route path="/search" element={<SearchPage />} />
           <Route path="/settings" element={<SettingsPage />} />
           <Route path="/reels" element={<ReelsPage />} />

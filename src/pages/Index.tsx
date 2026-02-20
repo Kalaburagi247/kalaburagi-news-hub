@@ -1,86 +1,79 @@
 
-import React, { useEffect } from 'react';
+import React from 'react';
+import { Link } from 'react-router-dom';
 import { useQuery } from '@tanstack/react-query';
-import { fetchLatestPosts, fetchCategories, WordPressPost } from '../services/wordpress-api';
-import ArticleCard from '../components/ArticleCard';
-import CategoryList from '../components/CategoryList';
+import { fetchCategories, WordPressCategory } from '../services/wordpress-api';
 import LoadingSpinner from '../components/LoadingSpinner';
 import TopHeader from '../components/TopHeader';
 import BottomNavigation from '../components/BottomNavigation';
-import { toast } from 'sonner';
+import { Newspaper, Briefcase, Trophy, Heart, Cpu, GraduationCap, Globe, Landmark, Clapperboard, Users, Leaf, Utensils, Palette, Car, DollarSign, Folder } from 'lucide-react';
 
+const categoryIcons: Record<string, React.ReactNode> = {
+  news: <Newspaper className="h-6 w-6" />,
+  business: <Briefcase className="h-6 w-6" />,
+  sports: <Trophy className="h-6 w-6" />,
+  health: <Heart className="h-6 w-6" />,
+  technology: <Cpu className="h-6 w-6" />,
+  education: <GraduationCap className="h-6 w-6" />,
+  world: <Globe className="h-6 w-6" />,
+  politics: <Landmark className="h-6 w-6" />,
+  entertainment: <Clapperboard className="h-6 w-6" />,
+  lifestyle: <Users className="h-6 w-6" />,
+  environment: <Leaf className="h-6 w-6" />,
+  food: <Utensils className="h-6 w-6" />,
+  culture: <Palette className="h-6 w-6" />,
+  automobile: <Car className="h-6 w-6" />,
+  finance: <DollarSign className="h-6 w-6" />,
+};
+
+const getCategoryIcon = (slug: string) => {
+  const lower = slug.toLowerCase();
+  for (const key of Object.keys(categoryIcons)) {
+    if (lower.includes(key)) return categoryIcons[key];
+  }
+  return <Folder className="h-6 w-6" />;
+};
 
 const Index: React.FC = () => {
   const { 
-    data: posts, 
-    isLoading: postsLoading, 
-    error: postsError 
-  } = useQuery({
-    queryKey: ['latestPosts'],
-    queryFn: () => fetchLatestPosts(1, 15),
-  });
-  
-  const { 
     data: categories, 
-    isLoading: categoriesLoading 
+    isLoading 
   } = useQuery({
     queryKey: ['categories'],
     queryFn: fetchCategories,
   });
-  
-  useEffect(() => {
-    if (postsError) {
-      toast.error('Failed to load latest news');
-      console.error('Error loading posts:', postsError);
-    }
-  }, [postsError]);
-  
-  // Split posts into featured and regular
-  const featuredPost = posts && posts.length > 0 ? posts[0] : null;
-  const regularPosts = posts && posts.length > 1 ? posts.slice(1) : [];
-  
+
   return (
     <div className="pb-20">
       <TopHeader />
       
-      {/* Main content */}
       <main className="container px-4 pt-4">
-        {/* Categories */}
-        {categories && categories.length > 0 && (
-          <CategoryList categories={categories} loading={categoriesLoading} />
-        )}
-        
-        {/* Featured Post */}
-        <h2 className="text-xl font-bold mb-3">Latest News</h2>
-        {postsLoading ? (
+        <h2 className="text-xl font-bold mb-4">Categories</h2>
+        {isLoading ? (
           <LoadingSpinner />
-        ) : postsError ? (
-          <div className="text-center py-8">
-            <p className="text-destructive">Failed to load articles</p>
-            <button 
-              onClick={() => window.location.reload()} 
-              className="mt-4 text-news-accent underline"
-            >
-              Try again
-            </button>
+        ) : categories && categories.length > 0 ? (
+          <div className="grid grid-cols-3 gap-3">
+            {categories.map((category: WordPressCategory) => (
+              <Link
+                key={category.id}
+                to={`/category/${category.id}`}
+                className="flex flex-col items-center justify-center p-4 rounded-xl border border-border bg-card hover:bg-accent transition-colors text-center gap-2"
+              >
+                <div className="w-12 h-12 rounded-full bg-primary/10 flex items-center justify-center text-primary">
+                  {getCategoryIcon(category.slug)}
+                </div>
+                <span className="text-xs font-medium leading-tight text-foreground">{category.name}</span>
+                <span className="text-[10px] text-muted-foreground">{category.count} articles</span>
+              </Link>
+            ))}
           </div>
         ) : (
-          <>
-            {featuredPost && (
-              <ArticleCard post={featuredPost} isFeature={true} />
-            )}
-            
-            {/* Regular Posts */}
-            <div className="grid grid-cols-1 gap-4">
-              {regularPosts.map((post: WordPressPost) => (
-                <ArticleCard key={post.id} post={post} />
-              ))}
-            </div>
-          </>
+          <div className="text-center py-8">
+            <p className="text-muted-foreground">No categories found</p>
+          </div>
         )}
       </main>
       
-      {/* Bottom Navigation */}
       <BottomNavigation />
     </div>
   );

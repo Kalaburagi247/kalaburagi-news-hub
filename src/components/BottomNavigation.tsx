@@ -1,7 +1,7 @@
 
 import React from 'react';
 import { NavLink } from 'react-router-dom';
-import { Home, LayoutList, Film, Zap, Coffee } from 'lucide-react';
+import { Home, FileText, Film, Zap, Coffee } from 'lucide-react';
 
 const BottomNavigation: React.FC = () => {
   return (
@@ -17,13 +17,13 @@ const BottomNavigation: React.FC = () => {
         <span>Home</span>
       </NavLink>
       <NavLink 
-        to="/categories" 
+        to="/articles" 
         className={({ isActive }) => 
           `bottom-nav-item ${isActive ? 'active' : ''}`
         }
       >
-        <LayoutList className="h-5 w-5 mb-1" />
-        <span>Categories</span>
+        <FileText className="h-5 w-5 mb-1" />
+        <span>Articles</span>
       </NavLink>
       <NavLink 
         to="/reels" 
